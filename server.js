@@ -4,8 +4,8 @@
   const app = express();
 
   const corsOptions = {
-    //origin: "http://localhost:8081"  
-    origin: "*"
+    origin: "http://localhost:8081"  
+    //origin: "*"
   };
 
   
@@ -14,7 +14,7 @@
   app.use(bodyParser.urlencoded({ extended: true }));
 
 
-    const db = require("./api_parcial/models/index.js");
+    const db = require("./API_FINAL/models/index.js");
 
   db.sequelize.sync()
     .then(() => {
@@ -24,11 +24,15 @@
       console.error("Error al sincronizar la base de datos:", err.message);
     });
 
-
-  require("./api_parcial/routes/tarea.route.js")(app);
+  require("./API_FINAL/routes/allventa.route.js")(app);
+  require("./API_FINAL/routes/inventario.js")(app);
+  require("./API_FINAL/routes/localizacion.route.js")(app);
+  require("./API_FINAL/routes/partido.route.js")(app);
+  require("./API_FINAL/routes/usuario.route.js")(app);
+  require("./API_FINAL/routes/venta.route.js")(app);
 
   app.get("/", (req, res) => {
-    res.json({ message: "Bienvenido a la API de la UMG." });
+    res.json({ message: "Bienvenido a la API del Grupo S+." });
   });
 
   const PORT = process.env.PORT || 8081;
